@@ -4,6 +4,7 @@
   "description": "API design with Node.js Workshop - Kyiv, December 13, 2015",
   "main": "index.js",
   "scripts": {
+    "cover": "istanbul cover _mocha",
     "test": "mocha test --recursive --reporter=nyan",
     "watch": "mocha --watch test --recursive --reporter=min --growl"
   },
