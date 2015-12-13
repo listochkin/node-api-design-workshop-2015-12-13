@@ -6,11 +6,12 @@ const chai = require('chai'),
 const fetch = require('node-fetch'),
   co = require('co');
 
-const server = require('../src/jsonapi-server');
+const jsonapiServer = require('../src/jsonapi-server'),
+  authServer = require('../src/auth-proxy');
 
 describe('REST API', () => {
-  before(done => server.listen(5000, done));
-  after(() => server.close());
+  before(done => jsonapiServer.listen(5000, done));
+  after(() => jsonapiServer.close());
 
   it('/articles', co.wrap(function* () {
     const response = yield fetch('http://localhost:5000/articles');
@@ -18,4 +19,23 @@ describe('REST API', () => {
     const json = yield response.json();
     assert(json.data[0].id === '11', 'should have data');
   }));
+
+  describe('Authentication & Authorization', () => {
+    before(done => authServer.listen(6000, done));
+    after(() => authServer.close());
+
+    it('should authorize', co.wrap(function* () {
+      const response = yield fetch('http://localhost:6000/oauth/token', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          // real-life OAuth2 requests are conducted over HTTPS only
+          'Authorization': 'Basic ' + new Buffer('thom:nightworld').toString('base64')
+        },
+        body: 'grant_type=password&username=thomseddon&password=nightworld'
+      });
+      assert(response.ok, '/login response');
+    }));
+  });
+
 });
