@@ -1,0 +1,25 @@
+{
+  "name": "node-api-design-workshop-2015-12-13",
+  "version": "1.0.0",
+  "description": "API design with Node.js Workshop - Kyiv, December 13, 2015",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/listochkin/node-api-design-workshop-2015-12-13.git"
+  },
+  "author": "Andrey Listochkin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/listochkin/node-api-design-workshop-2015-12-13/issues"
+  },
+  "homepage": "https://github.com/listochkin/node-api-design-workshop-2015-12-13#readme",
+  "devDependencies": {
+    "chai": "^3.4.1",
+    "istanbul": "^0.4.1",
+    "mocha": "^2.3.4",
+    "node-fetch": "^1.3.3"
+  }
+}
